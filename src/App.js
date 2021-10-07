@@ -1,13 +1,22 @@
 import React from 'react';
+import "./App.css";
 
 // Any text element ie. a paragraph, heading etc
-import { Typography } from '@material-ui/core';
+import { Typography, AppBar, Toolbar, CssBaseline, IconButton } from '@material-ui/core';
+import MovieIcon from '@mui/icons-material/Movie';
 
 function App() {
   return (
-    <Typography variant="h1">
-      Hello World!
-    </Typography>
+    <>
+    <AppBar position="static">
+      <Toolbar>
+        <MovieIcon sx={{mr: 2}}/>
+        <Typography variant="h6" >
+          Movies
+        </Typography>
+      </Toolbar>
+    </AppBar>
+    </>
   );
 }
 
