@@ -2,11 +2,28 @@ import React from 'react';
 import "./App.css";
 
 // Any text element ie. a paragraph, heading etc
-import { Typography, AppBar, Toolbar, Card, CardHeader, CardContent, Grid, IconButton, makeStyles } from '@material-ui/core';
-import MovieIcon from '@mui/icons-material/Movie';
+import { Typography } from '@material-ui/core';
 import Styled from 'styled-components';
+import axios from "axios";
+import NavBar from "./Components/NavBar";
+import MovieGrid from './Components/MovieGrid';
 
 function App() {
+
+  let data;
+
+  axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=a77cd9909bcb0a1088d657d5c9bfdaf5&language=en-US&page=1")
+    .then((res) => {
+      data = res.data.results;
+      console.log(data);
+      // console.log(res);
+    }).catch((err) => {
+      // console.log(err);
+    }).finally(() => {
+      console.log("Promise finished");
+    });
+
+  console.log(data);
 
   let movie = [];
 
@@ -16,48 +33,16 @@ function App() {
 
   return (
     <>
-    <AppBar position="static">
-      <Toolbar>
-        <MovieIcon sx={{mr: 2}}/>
-        <Typography variant="h6" justify="center">
-          Test
-        </Typography>
-      </Toolbar>
-    </AppBar>
-    <GridContainer container justify="center" spacing={3}>
-      {movie.map((movieTitle) => 
-        <GridItem item sm={12} md={6} lg={4} zeroMinWidth>
-          <Movie>
-            <CardHeader
-              action={
-                <IconButton >
-                  <MovieIcon />
-                </IconButton>
-              }
-              title={movieTitle}
-              subheader="Hello"
-              />
-          </Movie>
-        </GridItem>
-      )}
-    </GridContainer>
+    <NavBar/>
+    <PageHeading  align="center" variant="h2">Top Hits</PageHeading>
+    <MovieGrid movie={movie}/>
     </>
   );
 }
 
-const GridContainer = Styled(Grid)`
-  margin: auto;
-  width: 95%;
-  // background-color: red;
-`;
-
-const GridItem = Styled(Grid)`
-  // background-color: orange;
-`;
-
-const Movie = Styled(Card)`
-  width: 375px;
-  margin: auto;
+const PageHeading = Styled(Typography)`
+  margin-top: 50px;
+  margin-bottom: 50px
 `;
 
 export default App;
