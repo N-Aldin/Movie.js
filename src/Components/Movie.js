@@ -4,28 +4,27 @@ import {Card, CardHeader, CardActions, CardMedia, IconButton, Typography} from "
 import StarIcon from '@mui/icons-material/Star';
 import MovieIcon from '@mui/icons-material/Movie';
 import Styled from 'styled-components';
-import testImg from "../Data/movieImg.jpg";
 
-let Movie = ({movie}) => (
+let Movie = ({ movie }) => (
   <MovieCard>
-    {/* {console.log(movie)}; */}
+    {console.log(movie)}
     <CardHeader
       action={
         <IconButton >
           <MovieIcon />
         </IconButton>
       }
-      title="Title"
-      subheader="Sept. 9, 2018"
+      title={<MovieTitle noWrap>{movie.title}</MovieTitle>}
+      subheader={movie.release_date}
     />
     <Poster
       component="img"
-      image={testImg}
+      image={"https://image.tmdb.org/t/p/w342" + movie.poster_path}
     />
     <CardActions>
       <IconButton>
         <StarIcon/>
-        <Typography>4.8</Typography>
+        <Typography>{movie.vote_average}</Typography>
       </IconButton>
     </CardActions>
   </MovieCard>
@@ -33,15 +32,19 @@ let Movie = ({movie}) => (
 
 const MovieCard = Styled(Card)`
   width: 250px;
-  height: 400px;
-  // width: 200;
-  // height: 300;
+  height: 394px;
+  // height: auto;
   margin: auto;
   transition: transform 0.25s;
 
   &:hover {
     transform: perspective(700px) translateZ(25px)
   }
+`;
+
+const MovieTitle = Styled(Typography)`
+  max-width: 178px;
+  font-weight: 600;
 `;
 
 const Poster = Styled(CardMedia)`

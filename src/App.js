@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import "./App.css";
 
 // Any text element ie. a paragraph, heading etc
@@ -10,32 +10,23 @@ import MovieGrid from './Components/MovieGrid';
 
 function App() {
 
-  let data;
+  // Initialize a rows state variable that will be set to [] on the initial load.
+  const [data, setData] = useState([]);
 
-  axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=a77cd9909bcb0a1088d657d5c9bfdaf5&language=en-US&page=1")
-    .then((res) => {
-      data = res.data.results;
-      console.log(data);
-      // console.log(res);
-    }).catch((err) => {
-      // console.log(err);
-    }).finally(() => {
-      console.log("Promise finished");
-    });
+  useEffect(() => {
+    axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=a77cd9909bcb0a1088d657d5c9bfdaf5&language=en-US&page=1")
+      .then(res => {
+        setData(res.data.results)
+      })
+  }, [])
 
   console.log(data);
 
-  let movie = [];
-
-  for (let i = 0; i < 11; ++i){
-    movie.push("Title");
-  }
-
   return (
     <>
-    <NavBar/>
-    <PageHeading  align="center" variant="h2">Top Hits</PageHeading>
-    <MovieGrid movie={movie}/>
+      <NavBar/>
+      <PageHeading  align="center" variant="h2">Top Hits</PageHeading>
+      <MovieGrid movie={data}/>
     </>
   );
 }
