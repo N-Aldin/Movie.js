@@ -8,7 +8,7 @@ let NavBar = () => (
     <Toolbar>
       <MovieIcon sx={{mr: 2}}/>
       <Typography variant="h6" justify="center">
-        MovieDB
+        Movie.js
       </Typography>
     </Toolbar>
   </AppBar>

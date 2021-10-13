@@ -7,6 +7,7 @@
 
 # testing
 /coverage
+Data/
 test.js
 
 # production
@@ -18,6 +19,7 @@ test.js
 .env.development.local
 .env.test.local
 .env.production.local
+.env
 ideas.txt
 
 npm-debug.log*
