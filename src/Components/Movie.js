@@ -1,59 +1,44 @@
 import React from 'react';
-
-import { Card, CardHeader, CardActions, CardMedia, Typography, CardActionArea, Tooltip } from "@material-ui/core";
+import { Card, CardHeader, CardMedia, Typography, CardActionArea, Tooltip } from "@material-ui/core";
 import Styled from 'styled-components';
 
-let Movie = ({ movie }) => (
-  <MovieCard>
-    {/* {console.log(movie)} */}
-    <CardActionArea>
+const Movie = ({ movie, movieID }) => {
 
-    <CHeader
-      title= { 
-        <Tooltip 
-          arrow 
+  return (
+    <MovieCard>
+      <CardActionArea onClick={() => { movieID(movie.id) }}>
+
+        <CHeader
           title={
-            <Typography>
-              {movie.title}
-            </Typography>
-          } 
-          placement="top"
-        >
-          <MovieTitle noWrap>
-            {movie.title}
-          </MovieTitle>
-        </Tooltip>
-      }
-      subheader={movie.release_date}
-      sx={{p: 0}}
-    />
-    <Poster
-      component="img"
-      image={process.env.REACT_APP_POSTER_PATH + movie.poster_path}
-    />
-    {/* <CActions>
-      <IconContainer>
-        <StarIcon/>
-        <Typography>{movie.vote_average}</Typography>
-      </IconContainer>
-    </CActions> */}
-    </CardActionArea>
+            <Tooltip
+              arrow
+              title={
+                <Typography>
+                  {movie.title}
+                </Typography>
+              }
+              placement="top"
+            >
+              <MovieTitle noWrap>
+                {movie.title}
+              </MovieTitle>
+            </Tooltip>
+          }
+          subheader={movie.release_date}
+          sx={{ p: 0 }}
+        />
+        <Poster
+          component="img"
+          image={process.env.REACT_APP_POSTER_PATH + movie.poster_path}
+        />
+      </CardActionArea>
 
-  </MovieCard>
-);
+    </MovieCard>
+  );
+}
 
 const CHeader = Styled(CardHeader)`
   padding: 10px;
-`;
-
-const CActions = Styled(CardActions)`
-  padding: 0;
-`;
-
-const IconContainer = Styled.div`
-  display: flex;
-  padding: 12px 5px;
-  color: grey;
 `;
 
 const MovieCard = Styled(Card)`

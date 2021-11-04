@@ -1,14 +1,13 @@
 import React from 'react';
-
 import { Grid } from "@material-ui/core";
 import Styled from "styled-components";
 import Movie from "./Movie.js";
 
-let MovieGrid = ({ movie }) => (
+const MovieGrid = ({ movie, movieID }) => (
   <GridContainer container justifyContent="center" spacing={3}>
-    {movie.map((m) => 
+    {movie.map((m) =>
       <GridItem item lg key={m.id}>
-        <Movie movie={m} />
+        <Movie movie={m} movieID={movieID} />
       </GridItem>
     )}
   </GridContainer>
