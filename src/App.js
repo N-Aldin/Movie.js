@@ -23,24 +23,9 @@ function App() {
       }).catch(err => console.log(err));
   }, []);
 
-  useEffect(() => {
-
-    if (!movieDisplay) {
-      console.log(movieDisplay);
-      return;
-    }
-
-    axios.get("https://api.themoviedb.org/3/movie/" + movieDisplay + "?api_key=" + process.env.REACT_APP_API_KEY + "&language=en-US")
-      .then(res => {
-        console.log(res);
-      }).catch(err => console.log(err));
-
-    console.log("displayInfo: " + movieDisplay);
-  }, [movieDisplay]);
-
   // This prints twice because of the React strictmode
   // UseEffect still only runs once so everything else here is functional
-  console.log("Rendered");
+  // console.log("Rendered");
 
   return (
     <>
@@ -48,7 +33,7 @@ function App() {
       <PageHeading align="center" variant="h2">Top Hits</PageHeading>
       <MovieGrid movie={data} movieID={setMovieDisplay} />
 
-      {movieDisplay && <MovieInfo />}
+      {movieDisplay && <MovieInfo movieID={movieDisplay} setMovieDisplay={setMovieDisplay} />}
     </>
   );
 }
