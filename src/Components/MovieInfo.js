@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Dialog, DialogTitle, DialogContent, Typography, CircularProgress, Button } from "@material-ui/core";
 import Styled from "styled-components";
 import axios from "axios";
+import Loading from "./Loading";
 
 const MovieInfo = ({ movieID, setMovieDisplay }) => {
 
@@ -18,10 +19,8 @@ const MovieInfo = ({ movieID, setMovieDisplay }) => {
 
     await axios.get("https://api.themoviedb.org/3/movie/" + movieID + "?api_key=" + process.env.REACT_APP_API_KEY + "&language=en-US")
       .then(async (res) => {
-        setTimeout(() => {
-          setMovie(res.data);
-          setLoading(false);
-        }, 250);
+        setMovie(res.data);
+        setLoading(false);
       })
       .catch(err => {
         alert("Could not get the movie data");
@@ -43,7 +42,7 @@ const MovieInfo = ({ movieID, setMovieDisplay }) => {
     >
       {loading ? (
         <MovieTitleContainer>
-          <LoadingIndicator />
+          <Loading />
         </MovieTitleContainer>
       ) : (
         <>

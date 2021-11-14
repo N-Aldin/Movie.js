@@ -6,7 +6,7 @@ const MoviePagination = ({ handlePagination, pageCount }) => {
 
   return (
     <Container>
-      <Pagination count={Math.max(15, pageCount + 1)} onChange={handlePagination} />
+      <Pagination page={parseInt(pageCount)} count={Math.max(15, pageCount + 1)} onChange={handlePagination} />
     </Container>
   );
 }
